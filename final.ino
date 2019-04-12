@@ -1,4 +1,7 @@
 #include <Servo.h> 
+/* custom lib for ultrasonic sensor
+    download here -> https://bitbucket.org/teckel12/arduino-new-ping/wiki/Home
+*/
 #include <NewPing.h>
 
 int n;
@@ -6,9 +9,7 @@ int duration, distance;
 int trigPin = (10);
 int echoPin = (12);
 
-String readString;
-
-Servo myservo1; 
+Servo myservo1;
 Servo myservo2;
 
 void setup() {
@@ -18,11 +19,15 @@ void setup() {
   myservo2.attach(9);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
-  pinMode(11, OUTPUT); //head led
-  pinMode(13, OUTPUT); //tail led
+  // head LED
+  pinMode(11, OUTPUT);
+  // tail LED
+  pinMode(13, OUTPUT);
   pinMode(3, OUTPUT);
-  pinMode(5, OUTPUT); //servo 1 signal
-  pinMode(6, OUTPUT); //servo 2 signal
+  // servo 1 signal
+  pinMode(5, OUTPUT);
+  // servo 2 signal
+  pinMode(6, OUTPUT);
 }
 
 void loop() {
@@ -44,7 +49,6 @@ void loop() {
     digitalWrite(3, HIGH);
     myservo1.write(n);
     myservo2.write(180-n);
-    Serial.println("stop");
     delay(500);
     //go back
     digitalWrite(5, LOW);
@@ -63,7 +67,6 @@ void loop() {
     digitalWrite(13, LOW);
     digitalWrite(11, HIGH);
     digitalWrite(3, LOW);
-    Serial.println("regular");
     digitalWrite(5, HIGH);
     myservo1.write(n);
     digitalWrite(6, LOW);
